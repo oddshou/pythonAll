@@ -19,8 +19,8 @@ from model.pages import Pages
 
 def printContet():
     page =  Pages(config.ROOT_URLS["root"])
-    page.getPagesContent()
-
+    # print page.get_soup_content()
+    page.create_pages_dao()
 
 
 if __name__ == "__main__":
