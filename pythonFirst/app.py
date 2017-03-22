@@ -23,7 +23,13 @@ def print_page_content():
         print "current page " + str(i)
         page =  Pages(config.ROOT_URLS["root_url"] + config.ROOT_URLS["root_page"] + "page" + str(i) + ".htm")
         # print page.get_soup_content()
-        page.create_pages_dao()
+        # print page.create_pages_dao()
+        #打印titile
+        for current_page in page.create_pages_dao():
+
+            print current_page['title']
+
+
 # demo url    /publish/portal24/tab16992/info848568.htm
 
 
@@ -32,5 +38,5 @@ def print_content_content():
     content.create_content_dao()
 
 if __name__ == "__main__":
-    print_content_content()
-    # print_page_content()
+    # print_content_content()
+    print_page_content()

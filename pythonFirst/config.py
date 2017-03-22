@@ -9,5 +9,5 @@ ROOT_URLS = {
 
 PAGE_CONFIG = {
     "pages_start": 1,
-    "pages_end": 2
+    "pages_end": 10
 }

@@ -24,6 +24,9 @@ class Pages(BaseDid):
         return newlisttag
 
     def create_pages_dao(self):
+        pages = []
         for child in self.get_useful_content()[0].find_all('li'):
             page = PagesDao(child.a["id"], child.a["href"], child.span.string, child.a["title"])
-            print page.create_dir()
+            # print page.create_dir()
+            pages.append(page.create_dir())
+        return pages
