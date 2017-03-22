@@ -14,11 +14,11 @@ class BaseDid(object):
 
     def get_soup_content(self):
         if not self._rootSoup:
-            from bs4 import BeautifulSoup
             import urllib2
             request = urllib2.Request(self.rootUrl)
             response = urllib2.urlopen(request)
             # print  response.read()
 
+            from bs4 import BeautifulSoup
             self._rootSoup = BeautifulSoup(response.read(), "lxml")
         return self._rootSoup

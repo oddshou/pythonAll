@@ -20,14 +20,10 @@ class Pages(BaseDid):
     def get_useful_content(self):
         soup = super(Pages, self).get_soup_content()
         newlisttag = soup.select(".new_list")
-        # print type(newlisttag)    #type list
         print len(newlisttag)
         return newlisttag
 
     def create_pages_dao(self):
-        print self.get_useful_content()
-        for child in self.get_useful_content():
+        for child in self.get_useful_content()[0].find_all('li'):
             page = PagesDao(child.a["id"], child.a["href"], child.span.string, child.a["title"])
             print page.create_dir()
-            # print type(child.a)
-        # print type(child)   #type tag
