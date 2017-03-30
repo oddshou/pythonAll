@@ -11,3 +11,14 @@ PAGE_CONFIG = {
     "pages_start": 1,
     "pages_end": 10
 }
+
+GLOBAL_SETTINGS = {
+    "db":{
+        'name':'englishs',
+        'user':'root',
+        'psw':'1234',
+        'host':'127.0.0.1:55511'
+    }
+
+
+}

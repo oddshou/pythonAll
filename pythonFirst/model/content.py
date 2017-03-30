@@ -9,9 +9,9 @@ class Content(BaseDid):
     """
     主要任务，处理分页内容，
     """
-    def __init__(self, url):
-        BaseDid.__init__(self, url)
-
+    def __init__(self, id, url):
+        BaseDid.__init__(self,url)
+        self.id = id
     # def get_pages_content(self):
     #     super(Pages, self).pass_to_bsobj()
     #     soup = self.rootSoup
@@ -42,8 +42,8 @@ class Content(BaseDid):
         for sss in soup.select('h1')[0]:
             if type(sss)!= Comment:
                 title = sss
-        contentDao = ContentDao(plist, title, authos, editor)
-        print contentDao.create_dir()
+        contentDao = ContentDao(plist, title, authos, editor, self.id)
+        return contentDao.create_dir()
 
 
 def has_tag_no_class(tag):
