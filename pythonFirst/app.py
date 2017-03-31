@@ -17,22 +17,28 @@ import config
 from model.pages import Pages
 from model.content import Content
 import utils.hanzisort as hanzi
-import allutils.db as db
+import allutils.dbaction as dbaction
 
 
 import sys
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
-def print_page_content():
+def add_all_data():
     pages = []
     for i in range(config.PAGE_CONFIG["pages_start"], config.PAGE_CONFIG["pages_end"]):
         print "current page " + str(i)
-        page =  Pages(config.ROOT_URLS["root_url"] + config.ROOT_URLS["root_page"] + "page" + str(i) + ".htm")
+        page =  Pages(config.ROOT_URLS["root_url"] + config.ROOT_URLS["root_page"] + "page" + str(i) + ".htm", i)
         pages.extend(page.create_pages_dao())
-    #打印titile
-    for current_page in cnsort(pages):  #完成对title的排序
+        print "current page " + str(i) + " end"
+
+    sort_pages = cnsort(pages)
+    dbaction.insert_all_page(sort_pages)
+    print "insert_all_page succeed"
+    # #打印titile
+    for current_page in sort_pages:  #完成对title的排序
         print current_page['title']
+        add_content_date(current_page)
 
 
 # demo url    /publish/portal24/tab16992/info848568.htm
@@ -47,37 +53,12 @@ def cnsort(pages):
         pages[j] = tem_page
     return pages
 
-def insert():
-    new_dict = {"1":2, "2":2, "3":3, "4":[1,2,3,4], "5":[8,7,6,5,4,3,2]}
-    values_list = []
-    for valuse in new_dict.values():
-
-    print value_to_string(new_dict.values())
-    # qmarks = ', '.join(dicts.values())
-    # cols = ', '.join(dicts.keys())
-    # for value in dicts.values():
-    #     print value
-    # sql = 'INSERT INTO %s (%s) VALUES (%s)'% ('', cols, qmarks)
-    # with db.MysqlConnection(config.GLOBAL_SETTINGS['db']) as mysql:
-    #     sql_result = mysql.execute_rowcount()
-
-def value_to_string(values):
-
-    values_list = []
-    for value in values:
-        if isinstance(value, list):
-            value_to_string(value)
-        else:
-            values_list.append(value)
-    return value_string
-
-
-
-def print_content_content():
-    # content = Content("847085", config.ROOT_URLS["root_url"] + "/publish/portal24/tab16992/info847085.htm")
-    # content_dic = content.create_content_dao()
-    insert()
+def add_content_date(page_dict):
+    content = Content(page_dict['oid'], page_dict['href'], page_dict['page'])
+    print "create content page from " + str(page_dict['page'])
+    content_dic = content.create_content_dao()
+    dbaction.insert_content(content_dic)
 
 if __name__ == "__main__":
-    print_content_content()
-    # print_page_content()
+    # add_content_date()
+    add_all_data()

@@ -8,8 +8,8 @@ ROOT_URLS = {
 }
 
 PAGE_CONFIG = {
-    "pages_start": 1,
-    "pages_end": 10
+    "pages_start": 60,
+    "pages_end": 61  #75
 }
 
 GLOBAL_SETTINGS = {
