@@ -29,14 +29,17 @@ class Content(BaseDid):
         authos = ''
         title = ''
         #解析内容和编辑信息
-        soup = self.get_useful_content()[0]
+        try:
+            soup = self.get_useful_content()[0]
+        except IndexError:
+            return
         for child in soup.find_all('p'):
             #剔除最后一项编辑
             if not child.has_attr('align'):
-                plist.append(child.string + "\n")
+                plist.append(child.get_text() + "\n")
             #保存编辑信息
             else:
-                editor = child.string
+                editor = child.get_text()
         #解析 autho，date
         for heads in soup.select('.s_w_f')[0].strings:
             authos += heads + ' '

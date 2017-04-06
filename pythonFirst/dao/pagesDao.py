@@ -13,6 +13,6 @@ class PagesDao(object):
         self.page = page
 
     def create_dir(self):
-        return {"oid": self.oid, "page": self.page, "href": config.ROOT_URLS["root_url"] + self.href, "date": self.date, "title": self.title}
+        return {"oid": self.oid, "page": self.page, "href": self.href, "date": self.date, "title": self.title}
 
 

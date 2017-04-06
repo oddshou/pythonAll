@@ -8,17 +8,22 @@ ROOT_URLS = {
 }
 
 PAGE_CONFIG = {
-    "pages_start": 60,
-    "pages_end": 61  #75
+    "pages_start": 1,
+    "pages_end": 75  #75
 }
 
 GLOBAL_SETTINGS = {
+    "get_data": 0,
     "db":{
         'name':'englishs',
         'user':'root',
         'psw':'1234',
         'host':'127.0.0.1:55511'
-    }
-
+    },
+    "redis": {
+        'db': 1,
+        'host':'127.0.0.1',
+        'port':55501
+    },
 
 }

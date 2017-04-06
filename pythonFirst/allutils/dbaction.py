@@ -24,29 +24,32 @@ def insert_all_page(dicts_list):
             mysql.commit()
     return sql_result
 
-def insert_content(dicts):
+def insert_content(dict_list):
     # new_dict = {"1":2, "2":2, "3":3, "4":[1,2,3,4], "5":[8,7,6,5,4,3,2]}
     """
     对数据库插入字典(单条)
     :param dicts:
     :return:
     """
-    values_list = []
-    for value in dicts.values():
-        if isinstance(value, list):
-            values_list.append(value_to_string(value))
-        else:
-            values_list.append(value)
-
+    tuple_dict_list_value = ()
+    for dict_content in dict_list:
+        values_list = []
+        for value in dict_content.values():
+            if isinstance(value, list):
+                values_list.append(value_to_string(value))
+                pass
+            else:
+                values_list.append(value)
+        tuple_dict_list_value += (values_list,)
     # print values_list
-    qmarks = ', '.join(['%s'] * len(dicts))
-    cols = ', '.join(dicts.keys())
+    qmarks = ', '.join(['%s'] * len(dict_list[0]))
+    cols = ', '.join(dict_list[0].keys())
     sql = 'INSERT INTO %s(%s) VALUES (%s)'% ('content', cols, qmarks)
     with db.MysqlConnection(config.GLOBAL_SETTINGS['db']) as mysql:
         # sql_result = mysql.execute_rowcount(sql, )
-        sql_result = mysql.execute_rowcount(sql, *values_list)
+        sql_result = mysql.executemany_rowcount(sql, tuple_dict_list_value)
         print sql_result
-        if sql_result == 1:
+        if sql_result == len(dict_list):
             mysql.commit()
     return sql_result
 
