@@ -1,7 +1,9 @@
 #!/bin/env python
 #-*- encoding=utf8 -*-
 
-
+import logic.groupJsonHandler
+import logic.groupElementJsonHandler
+import logic.contentJsonHandler
 
 HANDLER_MAP = {
     #'sendcode': logic.api.userhandler.SendCode,
@@ -11,5 +13,7 @@ HANDLER_MAP = {
     # 'ReqCheckList':logic.checkListJsonHandler.CheckListJsonHandler,
     # 'ReqAccessList':logic.accessListJsonHandler.AccessListJsonHandler,
     # 'ReqLogin':logic.loginJsonHandler.LoginJsonHandler,
-    # 'ReqResetPassword':logic.loginJsonHandler.ResetPasswordJsonHandler,
+    'ReqGroupList':logic.groupJsonHandler.GroupJsonHandler,
+    'ReqGroupElementList':logic.groupElementJsonHandler.GroupElementJsonHandler,
+    'ReqContent':logic.contentJsonHandler.ContentJsonHandler,
 }

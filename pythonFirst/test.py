@@ -39,17 +39,26 @@ def cnsort(pages):
 
 # print_title_sort()
 
-import re
+# import re
+#
+# compile_str = ur'英语(.*)三'
+# print type(compile_str)
+# match_str = unicode('新概念英语语法讲解三章，第三节-lesson5','utf-8')
+# print type(match_str)
+# pattern = re.compile(compile_str)
+# match = pattern.search(match_str)
+# if match:
+#     print match.group()
+#     print match.groups()
+#     print match.pos
+#     print match.endpos
+#     print match.lastindex
+#     print match.lastgroup
 
-compile_str = r'(.*)ll'
-match_str = 'hello world, hello oddshou'
+# import hashlib
+#
+# src = 'oddskey'
+# m2 = hashlib.md5()
+# m2.update(src)
+# print m2.hexdigest()    #27a5ddfd5c81a95502fcbaab47379277
 
-pattern = re.compile(compile_str)
-match = pattern.match(match_str)
-if match:
-    print match.group()
-    print match.groups()
-    print match.pos
-    print match.endpos
-    print match.lastindex
-    print match.lastgroup

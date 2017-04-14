@@ -4,6 +4,7 @@
 from logic.handlers import BaseHandler
 
 import json
+from utils.OJson import OJsonEncoder
 import tornado.web
 import tornado.gen
 from  tornado.httpclient import AsyncHTTPClient, HTTPRequest
@@ -27,7 +28,19 @@ class JSONHandler(BaseHandler):
         if 'header' in request_data:
             header = request_data['header']
             result = header
+            if 'key' not in header.keys() or self.check_key_error(header['key']):
+                raise BusinessException('key error')
+        else:
+            raise BusinessException('key error')
         return result
+
+
+    def check_key_error(self, key):
+        import hashlib
+        src = 'oddskey'
+        m2 = hashlib.md5()
+        m2.update(src)
+        return m2.hexdigest() != key    #27a5ddfd5c81a95502fcbaab47379277
 
     @tornado.web.asynchronous
     @tornado.gen.coroutine
@@ -46,15 +59,13 @@ class JSONHandler(BaseHandler):
                     if method in handler_map:
                         handler = handler_map[method]()
                         handler.request = request['params']
-                        handler.request["ip_client"] = get_real_ip(self)
-                        print handler.request["ip_client"]
                         handler.method = method
                         handler.tornado_handler = self
                         # handler.logger = self.logger
                         handler.comm_args = self.parse_commm_params(request)
 
                         yield handler.deal()
-                        self.write(json.dumps(handler.response))
+                        self.write(json.dumps(handler.response, cls=OJsonEncoder))
                         self.finish()
                     else:
                         raise BusinessException("Api Not Exist!")
@@ -129,11 +140,3 @@ class APIBase(object):
     def deal(self):
         # 未实现
         raise NotImplementedError("")
-
-def get_real_ip(tornado_ins):
-    """获取真实ip地址
-    """
-    try:
-        return tornado_ins.request.headers['X-Real-Ip']
-    except:
-        return tornado_ins.request.remote_ip
