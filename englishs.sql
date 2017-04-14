@@ -28,10 +28,10 @@ CREATE TABLE `content` (
   `page` int(11) DEFAULT NULL,
   `title` varchar(200) DEFAULT NULL,
   `autho` varchar(200) DEFAULT NULL,
-  `editor` varchar(100) DEFAULT NULL,
+  `editor` varchar(200) DEFAULT NULL,
   `plist` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1400 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `pages` (
   `href` varchar(250) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4298 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1389 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -61,4 +61,4 @@ CREATE TABLE `pages` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-31 19:33:54
+-- Dump completed on 2017-04-14 19:14:23
