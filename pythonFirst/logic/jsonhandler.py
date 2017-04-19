@@ -19,6 +19,10 @@ class BusinessException(Exception):
 class JSONHandler(BaseHandler):
     """JSON 协议 Handler（入口）
     """
+    def options(self, *args, **kwargs):
+        self.set_status(200)
+        self.finish()
+
     def get(self):
         self.write('非法请求')
         self.finish()
