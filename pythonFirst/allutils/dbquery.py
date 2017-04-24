@@ -32,7 +32,7 @@ def create_pattern(pattern_string):
     for pattern in pattern_list:
         new_pattern_list.append(pattern.replace(u'……', u'(.*)'))
     all_pattern = '|'.join(new_pattern_list)
-    print all_pattern
+    # print all_pattern
     return all_pattern
 
 def create_group(group_title, group_pattern, pageSize, pageIndex):

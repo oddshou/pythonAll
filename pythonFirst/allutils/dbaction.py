@@ -20,7 +20,7 @@ def insert_all_page(dicts_list):
     with db.MysqlConnection(config.GLOBAL_SETTINGS['db']) as mysql:
         sql_result = mysql.executemany_rowcount(sql, dicts_value_tuple)
         print sql_result
-        if sql_result == len(dicts_list):
+        if sql_result > 0:
             mysql.commit()
     return sql_result
 
@@ -49,7 +49,7 @@ def insert_content(dict_list):
         # sql_result = mysql.execute_rowcount(sql, )
         sql_result = mysql.executemany_rowcount(sql, tuple_dict_list_value)
         print sql_result
-        if sql_result == len(dict_list):
+        if sql_result > 0:
             mysql.commit()
     return sql_result
 

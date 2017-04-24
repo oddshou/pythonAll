@@ -7,10 +7,12 @@
 
 
 import re
+import os
 
+current_path = os.path.dirname(__file__)
 # 建立拼音辞典
 dic_py = dict()
-f_py = open('py.txt',"r")
+f_py = open(current_path + '/py.txt',"r")
 content_py = f_py.read()
 lines_py = content_py.split('\n')
 n=len(lines_py)
@@ -22,7 +24,7 @@ f_py.close()
 
 # 建立笔画辞典
 dic_bh = dict()
-f_bh = open('bh.txt',"r")
+f_bh = open(current_path + '/bh.txt',"r")
 content_bh = f_bh.read()
 lines_bh = content_bh.split('\n')
 n=len(lines_bh)
