@@ -51,11 +51,11 @@ def create_group(group_title, group_pattern, pageSize, pageIndex):
     with db.MysqlConnection(config.GLOBAL_SETTINGS['db']) as mysql:
         query_data = mysql.query(select_sql, patterns)
         if len(query_data) > pageSize*pageIndex and len(query_data) > pageSize * (pageIndex + 1):
-            return query_data[(pageSize*pageIndex): pageSize*(pageIndex + 1)]
+            return query_data[(pageSize*pageIndex): pageSize*(pageIndex + 1)], len(query_data)
         elif len(query_data) > pageSize*pageIndex and len(query_data) <= pageSize * (pageIndex + 1):
-            return query_data[(pageSize*pageIndex):]
+            return query_data[(pageSize*pageIndex):], len(query_data)
         else:
-            return {}
+            return [],0
 
 
 # group_pattern = u'……短语……？语法'

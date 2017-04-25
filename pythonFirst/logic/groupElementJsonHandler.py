@@ -23,7 +23,7 @@ class GroupElementJsonHandler(APIBase):
         #              groups['title'], groups['message'], self.request['pageSize'], self.request['pageIndex'])
         if groupId > 0 and groupId <= len(config.GROUP_LIST):
             group = config.GROUP_LIST[groupId - 1]
-            self.response['data'] = dbquery.create_group(
+            (self.response['data'], self.response['dataLength']) = dbquery.create_group(
                 group['title'], group['message'], self.request['pageSize'], self.request['pageIndex'])
 
 
